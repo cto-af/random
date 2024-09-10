@@ -7,14 +7,10 @@ settings:
 importers:
 
   .:
-    dependencies:
+    devDependencies:
       '@cto.af/eslint-config':
         specifier: 4.1.6
         version: 4.1.6(eslint@9.10.0)(typescript@5.6.2)
-      typescript-eslint:
-        specifier: 8.5.0
-        version: 8.5.0(eslint@9.10.0)(typescript@5.6.2)
-    devDependencies:
       c8:
         specifier: 10.1.2
         version: 10.1.2
@@ -33,6 +29,9 @@ importers:
       typescript:
         specifier: 5.6.2
         version: 5.6.2
+      typescript-eslint:
+        specifier: 8.5.0
+        version: 8.5.0(eslint@9.10.0)(typescript@5.6.2)
 
 packages:
 
