@@ -19,7 +19,7 @@
     "clean": "rimraf coverage docs lib",
     "lint": "eslint .",
     "pretest": "tsc --inlineSourceMap",
-    "test": "c8 node --test",
+    "test": "c8 node --experimental-global-webcrypto --test",
     "posttest": "npm run ts",
     "docs": "typedoc",
     "ts": "tsc",
