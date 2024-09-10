@@ -2,9 +2,13 @@
   "name": "@cto.af/random",
   "version": "0.0.2",
   "decription": "",
-  "main": "index.js",
+  "main": "lib/index.js",
   "type": "module",
-  "keywords": [],
+  "keywords": [
+    "random",
+    "vose",
+    "testable"
+  ],
   "author": "Joe Hildebrand <joe-github@cursive.net>",
   "license": "MIT",
   "repository": {
