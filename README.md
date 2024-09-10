@@ -18,5 +18,5 @@ Example:
 ```
 
 ---
-[![Build Status](https://github.com/cto_af/random/workflows/Tests/badge.svg)](https://github.com/cto_af/random/actions?query=workflow%3ATests)
+[![Tests](https://github.com/cto-af/random/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/cto-af/random/actions/workflows/node.js.yml)
 [![codecov](https://codecov.io/gh/cto-af/random/graph/badge.svg?token=jwhPKIpxcv)](https://codecov.io/gh/cto-af/random)
