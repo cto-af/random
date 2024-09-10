@@ -9,11 +9,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cto_af/@cto.af/random.git"
+    "url": "git+https://github.com/cto-af/random.git"
   },
-  "homepage": "https://github.com/cto_af/@cto.af/random#readme",
+  "homepage": "https://github.com/cto-af/random#readme",
   "bugs": {
-    "url": "https://github.com/cto_af/@cto.af/random/issues"
+    "url": "https://github.com/cto-af/random/issues"
   },
   "scripts": {
     "clean": "rimraf coverage docs lib",
