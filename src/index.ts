@@ -24,6 +24,7 @@ export const randBytes: RandBytes = (
 ): Uint8Array => {
   assert(reason);
   const array = new Uint8Array(size);
+
   // eslint-disable-next-line n/no-unsupported-features/node-builtins
   return crypto.getRandomValues(array);
 };
