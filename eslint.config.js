@@ -1,4 +1,5 @@
 import es6 from '@cto.af/eslint-config/es6.js';
+import globals from '@cto.af/eslint-config/globals.js';
 import jsdoc from '@cto.af/eslint-config/jsdoc.js';
 import jts from '@cto.af/eslint-config/jsdoc_ts.js';
 import markdown from '@cto.af/eslint-config/markdown.js';
@@ -19,4 +20,12 @@ export default [
   ...jsdoc,
   ...jts,
   ...markdown,
+  {
+    files: [
+      '**/*.ts',
+    ],
+    languageOptions: {
+      globals: globals['shared-node-browser'],
+    },
+  },
 ];
