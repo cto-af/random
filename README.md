@@ -19,4 +19,4 @@ Example:
 
 ---
 [![Build Status](https://github.com/cto_af/random/workflows/Tests/badge.svg)](https://github.com/cto_af/random/actions?query=workflow%3ATests)
-[![codecov](https://codecov.io/gh/cto_af/random/branch/main/graph/badge.svg?token=N7B7YLIDM4)](https://codecov.io/gh/cto_af/random)
+[![codecov](https://codecov.io/gh/cto-af/random/graph/badge.svg?token=jwhPKIpxcv)](https://codecov.io/gh/cto-af/random)
