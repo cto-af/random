@@ -13,6 +13,15 @@ export type FreqArray<T> = T[] & {
   [FREQ_SYM]?: number[];
 };
 
+interface GRV {
+  getRandomValues<T extends ArrayBufferView | null>(array: T): T;
+}
+
+const ourCrypto = (
+  // eslint-disable-next-line n/no-unsupported-features/node-builtins
+  (typeof crypto === 'undefined') ? (await import('node:crypto')) : crypto
+) as GRV;
+
 /**
  * Default RNG that uses crypto.randomBytes.
  * @param size Number of bytes.
@@ -25,8 +34,7 @@ export const randBytes: RandBytes = (
   assert(reason);
   const array = new Uint8Array(size);
 
-  // eslint-disable-next-line n/no-unsupported-features/node-builtins
-  return crypto.getRandomValues(array);
+  return ourCrypto.getRandomValues(array);
 };
 
 /**

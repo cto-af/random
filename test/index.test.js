@@ -2,14 +2,17 @@ import {deepEqual, equal, ok, throws} from 'node:assert/strict';
 import {Buffer} from 'node:buffer';
 import {Modnar} from './fixtures/modnar.js';
 import {Random} from '../lib/index.js';
+// eslint-disable-next-line n/no-unsupported-features/node-builtins
 import {test} from 'node:test';
 
+// eslint-disable-next-line n/no-unsupported-features/node-builtins
 test.beforeEach(t => {
   const m = new Modnar();
   const r = new Random(m.source);
   t.context = {m, r};
 });
 
+// eslint-disable-next-line n/no-unsupported-features/node-builtins
 test.afterEach(t => {
   ok(t.context.m.isDone);
 });
