@@ -89,7 +89,7 @@ test('pick', t => {
   m.pick(1, ary, 'test');
   equal(r.pick(ary, 'test'), 1);
 
-  ary[Random.FREQS] = [10, 1, 0.1, 7];
+  r.assignWeights(ary, [10, 1, 0.1, 7]);
   m.pick(2, ary, 'test');
   m.pick(1, ary, 'test');
   m.pick(3, ary, 'test');

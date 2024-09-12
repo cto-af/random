@@ -1,7 +1,7 @@
 import {Vose} from './vose.js';
 import {assert} from './assert.js';
 
-const FREQ_SYM = Symbol('FREQS');
+const VOSE_SYM = Symbol('VOSE');
 
 /**
  * Function to generate random bytes.  This is pluggable to allow for testing,
@@ -10,7 +10,7 @@ const FREQ_SYM = Symbol('FREQS');
 export type RandBytes = (size: number, reason: string) => Uint8Array;
 
 export type FreqArray<T> = T[] & {
-  [FREQ_SYM]?: number[];
+  [VOSE_SYM]?: Vose;
 };
 
 interface GRV {
@@ -42,12 +42,12 @@ export const randBytes: RandBytes = (
  * @private
  */
 export class Random {
-  public static FREQS = FREQ_SYM;
+  // Only exported for testing.
+  public static _VOSE_SYM = VOSE_SYM;
 
   // Method `gauss` generates two numbers each time.
   #spareGauss: number | null = null;
   #source: RandBytes;
-  #freqs = new WeakMap<any[], Vose>();
 
   /**
    * Create.
@@ -60,6 +60,29 @@ export class Random {
 
   static #view(bytes: Uint8Array): DataView {
     return new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  }
+
+  /**
+   * Assign weights to an array for Vose sampling.
+   *
+   * @param ary Array to assign weights to.
+   * @param gen The weights. If undefined, use 1.
+   * @returns The original array, modified.
+   */
+  public assignWeights<T>(
+    ary: T[],
+    gen: Generator<number, void, undefined> | number[]
+  ): T[] {
+    const weights = Array.isArray(gen) ?
+      gen :
+      Array.from({length: ary.length}, () => gen.next().value ?? 1);
+    Object.defineProperty(ary, VOSE_SYM, {
+      value: new Vose(weights, this),
+      enumerable: false,
+      configurable: false,
+      writable: false,
+    });
+    return ary;
   }
 
   /**
@@ -176,13 +199,8 @@ export class Random {
   public pick<T>(ary: FreqArray<T>, reason = 'unspecified'): T {
     assert(ary.length > 0);
 
-    const weights = ary[FREQ_SYM];
-    if (weights) {
-      let freqs = this.#freqs.get(ary);
-      if (!freqs) {
-        freqs = new Vose(weights, this);
-        this.#freqs.set(ary, freqs);
-      }
+    const freqs = ary[VOSE_SYM];
+    if (freqs) {
       return ary[freqs.pick(reason)];
     }
     return ary[this.upto(ary.length, `pick(${ary.length}),${reason}`)];

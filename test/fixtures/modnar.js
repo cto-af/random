@@ -1,5 +1,4 @@
 import {Random} from '../../lib/index.js';
-import {Vose} from '../../lib/vose.js';
 import assert from 'node:assert';
 import util from 'node:util';
 
@@ -11,7 +10,6 @@ import util from 'node:util';
 export class Modnar {
   /** @type {[Uint8Array, string][]} */
   #record = [];
-  #freqs = new WeakMap();
   #spareGauss = null;
   #realRandom = null;
 
@@ -147,13 +145,8 @@ export class Modnar {
     if (i === -1) {
       throw new Error(`not found: ${m} in ${ary}`, {ary, m, reason});
     }
-    const weights = ary[Random.FREQS];
-    if (weights) {
-      let freqs = this.#freqs.get(ary);
-      if (!freqs) {
-        freqs = new Vose(weights, this);
-        this.#freqs.set(ary, freqs);
-      }
+    const freqs = ary[Random._VOSE_SYM];
+    if (freqs) {
       // Reverse the Vose.  If i is in the alias table, coin was tails and
       // that side came up on the die.  If not, we got heads on die roll of i.
       const [_prob, alias] = freqs._tables;
