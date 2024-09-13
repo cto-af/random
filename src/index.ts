@@ -17,8 +17,10 @@ interface GRV {
   getRandomValues<T extends ArrayBufferView | null>(array: T): T;
 }
 
-// Work-around for node18.  Coverage should happen in CI.
+// Work-around for node18.
+// Hard to get coverage of both forks in one node version.
 const ourCrypto = (
+  // c8 ignore next 3
   // eslint-disable-next-line n/no-unsupported-features/node-builtins
   (typeof crypto === 'undefined') ?
     (await import('node:crypto')) :
