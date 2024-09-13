@@ -7,10 +7,10 @@ import test from 'node:test';
 test('vose', () => {
   const r = new Random();
 
-  throws(() => new Vose([], r), {
-    message: 'Total probability of 0.',
-  });
-  throws(() => new Vose([0, 0, 0], r), {
+  const v0 = new Vose([]);
+  ok(v0);
+
+  throws(() => new Vose([0, 0, 0]), {
     message: 'Total probability of 0.',
   });
   throws(() => new Vose([-1], r), {
@@ -18,7 +18,7 @@ test('vose', () => {
   });
 
   const w = [0.1, 1, 10];
-  const v = new Vose(w, r);
+  const v = new Vose(w);
   ok(v);
 
   const freq = w.map(() => 0);
@@ -29,15 +29,15 @@ test('vose', () => {
   equal(freq.reduce((p, x) => p + x), times);
 
   // 0 probability never picked.
-  const v2 = new Vose([1, 0, 0], r);
+  const v2 = new Vose([1, 0, 0]);
   for (let i = 0; i < times; i++) {
     equal(v2.pick(r), 0);
   }
 
   const empty = new Array(1);
   empty.push(2);
-  throws(() => new Vose(empty, r), {message: 'Sparse array not allowed'});
+  throws(() => new Vose(empty), {message: 'Sparse array not allowed'});
   empty[0] = null;
-  const v4 = new Vose(empty, r);
+  const v4 = new Vose(empty);
   ok(v4);
 });
