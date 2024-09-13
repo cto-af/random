@@ -24,14 +24,14 @@ test('vose', () => {
   const freq = w.map(() => 0);
   const times = 1000;
   for (let i = 0; i < times; i++) {
-    freq[v.pick()]++;
+    freq[v.pick(r)]++;
   }
   equal(freq.reduce((p, x) => p + x), times);
 
   // 0 probability never picked.
   const v2 = new Vose([1, 0, 0], r);
   for (let i = 0; i < times; i++) {
-    equal(v2.pick(), 0);
+    equal(v2.pick(r), 0);
   }
 
   const empty = new Array(1);
