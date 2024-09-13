@@ -32,7 +32,7 @@ export class Vose {
       // from undefined.
       throw new Error('Sparse array not allowed');
     }
-    if (tot === 0) {
+    if ((tot === 0) && (n > 0)) {
       throw new Error('Total probability of 0.');
     }
 
