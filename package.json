@@ -1,6 +1,6 @@
 {
   "name": "@cto.af/random",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "decription": "",
   "main": "lib/index.js",
   "type": "module",
