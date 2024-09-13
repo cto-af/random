@@ -17,9 +17,15 @@ interface GRV {
   getRandomValues<T extends ArrayBufferView | null>(array: T): T;
 }
 
+// Work-around for node18.
+// Hard to get coverage of both forks in one node version.
 const ourCrypto = (
+  // c8 ignore next 3
   // eslint-disable-next-line n/no-unsupported-features/node-builtins
-  (typeof crypto === 'undefined') ? (await import('node:crypto')) : crypto
+  (typeof crypto === 'undefined') ?
+    (await import('node:crypto')) :
+    // eslint-disable-next-line n/no-unsupported-features/node-builtins
+    crypto
 ) as GRV;
 
 /**
@@ -58,10 +64,6 @@ export class Random {
     this.#source = source;
   }
 
-  static #view(bytes: Uint8Array): DataView {
-    return new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
-  }
-
   /**
    * Assign weights to an array for Vose sampling.
    *
@@ -69,20 +71,25 @@ export class Random {
    * @param gen The weights. If undefined, use 1.
    * @returns The original array, modified.
    */
-  public assignWeights<T>(
+  public static assignWeights<T>(
     ary: T[],
     gen: Generator<number, void, undefined> | number[]
   ): T[] {
     const weights = Array.isArray(gen) ?
       gen :
       Array.from({length: ary.length}, () => gen.next().value ?? 1);
+
     Object.defineProperty(ary, VOSE_SYM, {
-      value: new Vose(weights, this),
+      value: new Vose(weights),
       enumerable: false,
-      configurable: false,
+      configurable: true,
       writable: false,
     });
     return ary;
+  }
+
+  static #view(bytes: Uint8Array): DataView {
+    return new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
   }
 
   /**
@@ -201,7 +208,7 @@ export class Random {
 
     const freqs = ary[VOSE_SYM];
     if (freqs) {
-      return ary[freqs.pick(reason)];
+      return ary[freqs.pick(this, reason)];
     }
     return ary[this.upto(ary.length, `pick(${ary.length}),${reason}`)];
   }

@@ -89,7 +89,21 @@ test('pick', t => {
   m.pick(1, ary, 'test');
   equal(r.pick(ary, 'test'), 1);
 
-  r.assignWeights(ary, [10, 1, 0.1, 7]);
+  const weights = [10, 1, 0.1, 7];
+  Random.assignWeights(ary, weights);
+  m.pick(2, ary, 'test');
+  m.pick(1, ary, 'test');
+  m.pick(3, ary, 'test');
+  m.pick(8, ary, 'test');
+
+  equal(r.pick(ary, 'test'), 2);
+  equal(r.pick(ary, 'test'), 1);
+  equal(r.pick(ary, 'test'), 3);
+  equal(r.pick(ary, 'test'), 8);
+
+  // 1 is the default
+  delete weights[1];
+  Random.assignWeights(ary, weights.values());
   m.pick(2, ary, 'test');
   m.pick(1, ary, 'test');
   m.pick(3, ary, 'test');

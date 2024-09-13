@@ -9,18 +9,14 @@ import type {Random} from './index.js';
 export class Vose {
   #alias: number[];
   #prob: number[];
-  #random;
 
   /**
    * Prepare the probability and alias tables.
    *
    * @param weights Relative weights, per pick array item.  If
    *   undefined, `1` is the default.
-   * @param random Random source.
    */
-  public constructor(weights: number[], random: Random) {
-    this.#random = random;
-
+  public constructor(weights: number[]) {
     // Vose is based on total probability === 1.
     let n = 0;
     const tot = weights.reduce((t, v) => {
@@ -84,13 +80,14 @@ export class Vose {
   /**
    * Pick a random position in the weighted array.
    *
+   * @param rnd Random instance.
    * @param reason Reason for generation.
    * @returns The *position*, not the item in the array.
    */
-  public pick(reason = 'unspecified'): number {
+  public pick(rnd: Random, reason = 'unspecified'): number {
     const n = this.#prob.length;
-    const i = this.#random.upto(n, `Vose.pick.die(${n}),${reason}`);
-    const flip = this.#random.random(`Vose.pick.flip,${reason}`);
+    const i = rnd.upto(n, `Vose.pick.die(${n}),${reason}`);
+    const flip = rnd.random(`Vose.pick.flip,${reason}`);
     if (flip < this.#prob[i]) {
       return i; // Heads
     }
