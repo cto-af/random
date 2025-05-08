@@ -1,7 +1,6 @@
 import {equal, ok, throws} from 'node:assert/strict';
 import {Random} from '../lib/index.js';
 import {Vose} from '../lib/vose.js';
-// eslint-disable-next-line n/no-unsupported-features/node-builtins
 import test from 'node:test';
 
 test('vose', () => {
