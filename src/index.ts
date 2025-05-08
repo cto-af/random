@@ -21,10 +21,8 @@ interface GRV {
 // Hard to get coverage of both forks in one node version.
 const ourCrypto = (
   // c8 ignore next 3
-  // eslint-disable-next-line n/no-unsupported-features/node-builtins
   (typeof crypto === 'undefined') ?
     (await import('node:crypto')) :
-    // eslint-disable-next-line n/no-unsupported-features/node-builtins
     crypto
 ) as GRV;
 
