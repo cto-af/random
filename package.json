@@ -5,7 +5,7 @@
   "type": "module",
   "exports": {
     ".": "./lib/index.js",
-    "./modnar": "./lib/modnar.js"
+    "./test": "./lib/modnar.js"
   },
   "keywords": [
     "random",

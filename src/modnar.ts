@@ -26,8 +26,9 @@ function u8dv(size: number): [Uint8Array, DataView] {
  *
  * @example
  * ```js
- * import {Modnar} from '@cto.af/random/modnar'
- * import {Random} from '@cto.af/random'
+ * import {Modnar} from '@cto.af/random/test';
+ * import {Random} from '@cto.af/random';
+ *
  * const m = new Modnar();
  * const r = new Random(m.source);
  * m.uInt32(1);
