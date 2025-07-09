@@ -2,11 +2,13 @@
  * Weak fill-in for node's assert, to keep this module node-free.
  *
  * @param x Assert that this is truthy.
+ * @param message Message for exception.
  * @throws If x is falsy.
  */
-export function assert(x: unknown): asserts x {
+export function assert(x: unknown, message?: string): asserts x {
   if (!x) {
-    throw new Error('Invalid assertion');
+    const m = message ?? 'Invalid assertion';
+    throw new Error(m);
   }
 }
 
@@ -18,11 +20,16 @@ export default assert;
  * @template T Same type.
  * @param x Anything.
  * @param y Anything.
+ * @param message Message for exception.
  * @throws If x !== y.
  */
-export function equal<T>(x: T, y: T): void {
+export function equal<T>(x: T, y: T, message?: string): void {
   if (x !== y) {
-    throw new Error(`${x} !== ${y}`);
+    let m = `${x} !== ${y}`;
+    if (message) {
+      m += `: ${message}`;
+    }
+    throw new Error(m);
   }
 }
 

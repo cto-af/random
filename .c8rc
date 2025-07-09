@@ -1,14 +1,10 @@
 {
   "reporter": [
-    "lcovonly",
-    "html-spa",
-    "codecov",
-    "console-details",
-    "v8-json"
+    "text",
+    "lcov"
   ],
-  "experimental-monocart": true,
   "exclude": [
-    "**/test/**",
-    "**/node_modules/**"
+    "test/**",
+    "node_modules/**"
   ]
 }
