@@ -2,7 +2,10 @@
 
 /** @type {import('typedoc').TypeDocOptions} */
 module.exports = {
-  entryPoints: ['src/index.ts'],
+  entryPoints: [
+    'src/index.ts',
+    'src/modnar.ts',
+  ],
   out: 'docs',
   cleanOutputDir: true,
   sidebarLinks: {

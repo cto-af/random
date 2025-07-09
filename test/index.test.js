@@ -1,6 +1,6 @@
 import {deepEqual, equal, ok, throws} from 'node:assert/strict';
 import {Buffer} from 'node:buffer';
-import {Modnar} from './fixtures/modnar.js';
+import {Modnar} from '../lib/modnar.js';
 import {Random} from '../lib/index.js';
 import {test} from 'node:test';
 

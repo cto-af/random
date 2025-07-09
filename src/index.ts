@@ -1,30 +1,11 @@
-import {Vose} from './vose.js';
+import {type FreqArray, VOSE_SYM, Vose} from './vose.js';
 import {assert} from './assert.js';
-
-const VOSE_SYM = Symbol('VOSE');
 
 /**
  * Function to generate random bytes.  This is pluggable to allow for testing,
  * but I bet someone else will find a reason to use it.
  */
 export type RandBytes = (size: number, reason: string) => Uint8Array;
-
-export type FreqArray<T> = T[] & {
-  [VOSE_SYM]?: Vose;
-};
-
-interface GRV {
-  getRandomValues<T extends ArrayBufferView | null>(array: T): T;
-}
-
-// Work-around for node18.
-// Hard to get coverage of both forks in one node version.
-const ourCrypto = (
-  // c8 ignore next 3
-  (typeof crypto === 'undefined') ?
-    (await import('node:crypto')) :
-    crypto
-) as GRV;
 
 /**
  * Default RNG that uses crypto.randomBytes.
@@ -38,7 +19,7 @@ export const randBytes: RandBytes = (
   assert(reason);
   const array = new Uint8Array(size);
 
-  return ourCrypto.getRandomValues(array);
+  return crypto.getRandomValues(array);
 };
 
 /**
@@ -46,9 +27,6 @@ export const randBytes: RandBytes = (
  * @private
  */
 export class Random {
-  // Only exported for testing.
-  public static _VOSE_SYM = VOSE_SYM;
-
   // Method `gauss` generates two numbers each time.
   #spareGauss: number | null = null;
   #source: RandBytes;
@@ -134,10 +112,10 @@ export class Random {
    * @returns The random number.
    */
   public uBigInt(bytes: number, reason = 'unspecified'): bigint {
-    const buf = this.bytes(bytes, `uBigInt,${reason}`);
+    const buf = this.bytes(bytes, `${bytes},uBigInt,${reason}`);
     let ret = 0n;
     for (const b of buf) {
-      ret = (ret << 8n) + BigInt(b);
+      ret = (ret << 8n) | BigInt(b);
     }
     return ret;
   }

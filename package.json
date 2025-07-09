@@ -2,8 +2,11 @@
   "name": "@cto.af/random",
   "version": "2.0.1",
   "decription": "",
-  "main": "lib/index.js",
   "type": "module",
+  "exports": {
+    ".": "./lib/index.js",
+    "./modnar": "./lib/modnar.js"
+  },
   "keywords": [
     "random",
     "vose",
@@ -32,17 +35,16 @@
   "devDependencies": {
     "@cto.af/eslint-config": "6.0.9",
     "@eslint/markdown": "6.6.0",
-    "@types/node": "24.0.3",
+    "@types/node": "24.0.12",
     "c8": "10.1.3",
-    "eslint": "9.29.0",
-    "eslint-plugin-jsdoc": "51.1.1",
-    "monocart-coverage-reports": "2.12.6",
+    "eslint": "9.30.1",
+    "eslint-plugin-jsdoc": "51.3.4",
     "rimraf": "6.0.1",
-    "typedoc": "0.28.5",
+    "typedoc": "0.28.7",
     "typescript": "5.8.3",
-    "typescript-eslint": "8.34.1"
+    "typescript-eslint": "8.36.0"
   },
-  "packageManager": "pnpm@10.12.1",
+  "packageManager": "pnpm@10.13.1",
   "engines": {
     "node": ">=20"
   }

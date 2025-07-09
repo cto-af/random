@@ -1,5 +1,11 @@
 import type {Random} from './index.js';
 
+export const VOSE_SYM: unique symbol = Symbol('VOSE');
+
+export type FreqArray<T> = T[] & {
+  [VOSE_SYM]?: Vose;
+};
+
 /**
  * Vose's Alias Method.
  *
