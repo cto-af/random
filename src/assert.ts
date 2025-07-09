@@ -9,3 +9,21 @@ export function assert(x: unknown): asserts x {
     throw new Error('Invalid assertion');
   }
 }
+
+export default assert;
+
+/**
+ * Throw if x !== y.
+ *
+ * @template T Same type.
+ * @param x Anything.
+ * @param y Anything.
+ * @throws If x !== y.
+ */
+export function equal<T>(x: T, y: T): void {
+  if (x !== y) {
+    throw new Error(`${x} !== ${y}`);
+  }
+}
+
+assert.equal = equal;

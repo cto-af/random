@@ -4,4 +4,5 @@ import {throws} from 'node:assert/strict';
 
 test('assert', () => {
   throws(() => assert(false));
+  throws(() => assert.equal(1, 2));
 });

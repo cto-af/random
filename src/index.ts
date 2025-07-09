@@ -1,17 +1,11 @@
-import {Vose} from './vose.js';
+import {type FreqArray, VOSE_SYM, Vose} from './vose.js';
 import {assert} from './assert.js';
-
-const VOSE_SYM = Symbol('VOSE');
 
 /**
  * Function to generate random bytes.  This is pluggable to allow for testing,
  * but I bet someone else will find a reason to use it.
  */
 export type RandBytes = (size: number, reason: string) => Uint8Array;
-
-export type FreqArray<T> = T[] & {
-  [VOSE_SYM]?: Vose;
-};
 
 interface GRV {
   getRandomValues<T extends ArrayBufferView | null>(array: T): T;
@@ -47,7 +41,7 @@ export const randBytes: RandBytes = (
  */
 export class Random {
   // Only exported for testing.
-  public static _VOSE_SYM = VOSE_SYM;
+  public static _VOSE_SYM: typeof VOSE_SYM = VOSE_SYM;
 
   // Method `gauss` generates two numbers each time.
   #spareGauss: number | null = null;
