@@ -2,7 +2,7 @@ import {Modnar} from '../lib/modnar.js';
 import assert from 'node:assert';
 import {test} from 'node:test';
 
-test('modnar', async() => {
+test('modnar', async () => {
   const m = new Modnar();
   assert(m.isDone);
   m.bool(true);
