@@ -82,8 +82,8 @@ export class Random {
   /**
    * Random unsigned 32-bit integer.
    *
-   * @param {string} [reason='unspecified'] Reason for generation.
-   * @returns {number} The random number.
+   * @param reason Reason for generation.
+   * @returns The random number.
    */
   public uInt32(reason = 'unspecified'): number {
     const bytes = this.bytes(4, `uInt32,${reason}`);
@@ -177,7 +177,7 @@ export class Random {
    *
    * @param ary Array to pick from, MUST NOT be empty.
    * @param reason Reason reason for generation.
-   * @returns {T} The selected array element.
+   * @returns The selected array element.
    */
   public pick<T>(ary: FreqArray<T>, reason = 'unspecified'): T {
     assert(ary.length > 0);
@@ -202,7 +202,6 @@ export class Random {
   /**
    * Pick zero or more of the array elements or string characters.
    *
-   * @template T
    * @param ary Pool to select from.
    * @param reason Reason for generation.
    * @returns The selected string characters (concatenated) or the selected
