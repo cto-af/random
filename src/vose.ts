@@ -21,6 +21,7 @@ export class Vose {
    *
    * @param weights Relative weights, per pick array item.  If
    *   undefined, `1` is the default.
+   * @throws On negative weight.
    */
   public constructor(weights: number[]) {
     // Vose is based on total probability === 1.

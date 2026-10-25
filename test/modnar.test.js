@@ -1,5 +1,5 @@
 import {Modnar} from '../lib/modnar.js';
-import assert from 'node:assert';
+import assert from 'node:assert/strict';
 import {test} from 'node:test';
 
 test('modnar', async () => {
